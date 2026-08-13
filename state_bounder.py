@@ -7,8 +7,6 @@ def check_valid(state: list) -> bool:
     sorted_state[0:3] = sorted(sorted_state[0:3])
     sorted_state[3:6] = sorted(sorted_state[3:6])
 
-    print(f"state {state}\nsorted_state {sorted_state}")
-
     if not sorted_state == state:
         return False
 
@@ -20,7 +18,12 @@ def check_valid(state: list) -> bool:
             inBottom |= state[3+j] == i
         if inTop and inBottom:
             return False
+    return True
 
 
-# tests
-check_valid([-1, 2, -1, 3, 2, 1])
+valid_counter = 0
+for state in product([-1, 1, 2, 3, 4, 5, 6], repeat=6):
+    if check_valid(list(state)):
+        valid_counter += 1
+
+print(valid_counter)
